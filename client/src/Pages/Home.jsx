@@ -1,11 +1,12 @@
 import React from 'react';
-import { Header } from '../Components';
+import { Feature, Header } from '../Components';
 
 const Home = () => {
   return (
     <div>
       <div>
         <Header />
+        <Feature />
       </div>
     </div>
   );
