@@ -8,6 +8,6 @@ export const fetchPoducts = () => async (dispatch) => {
     dispatch(fetchAll(data.data));
     dispatch(isLoading(false));
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 };

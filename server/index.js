@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { data } from './data.js';
+import { ProductRouter } from './Routers/Product.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,9 +16,7 @@ app.use(bodyParser.json({ limit: '30mb', extented: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extented: true }));
 app.use(cors());
 
-app.use('/products', (req, res) => {
-  res.json(data);
-});
+app.use('/products', ProductRouter);
 
 mongoose
   .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })

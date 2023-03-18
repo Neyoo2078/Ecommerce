@@ -49,7 +49,7 @@ const Rating = ({ rating, numRating }) => {
           <BsStar />
         )}
       </span>
-      <span className='mx-[3px]'>{numRating} reviews</span>
+      <span className='mx-[3px] text-[#070707]'>{numRating} reviews</span>
     </div>
   );
 };
