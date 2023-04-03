@@ -33,14 +33,16 @@ const leftArrowStyles = {
 
 const sliderStyles = {
   position: 'relative',
-  height: '300px',
-  width: '90%',
-  margin: ' 10px auto',
+
+  width: '55%',
 };
 
 const dotsContainerStyles = {
   display: 'flex',
   justifyContent: 'center',
+  position: 'absolute',
+  left: '45%',
+  bottom: '30px',
 };
 
 const dotStyle = {
@@ -78,12 +80,12 @@ const ImageSlider = () => {
   useEffect(() => {
     const m = setInterval(() => {
       goToNext();
-    }, 3000);
+    }, 9000);
     return () => clearInterval(m);
   }, [currentIndex]);
 
   return (
-    <div style={sliderStyles}>
+    <div style={sliderStyles} className='border-[2px]'>
       <div>
         <div onClick={goToPrevious} style={leftArrowStyles}>
           ❰
@@ -100,7 +102,9 @@ const ImageSlider = () => {
             style={dotStyle}
             key={slideIndex}
             onClick={() => goToSlide(slideIndex)}
-            className={`${slideIndex === currentIndex && 'text-[#ea3d3d]'} `}
+            className={` ${
+              slideIndex === currentIndex ? 'text-[#ea3d3d]' : 'text-[#fff]'
+            } `}
           >
             ●
           </div>

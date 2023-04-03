@@ -34,21 +34,7 @@ const Feauture = ({ data, setdata }) => {
         </div>
 
         <h1 className='text-[40px]'>Feature Product</h1>
-        <div>
-          <label htmlFor='Categories'> Categories: </label>
-          <select
-            className='text-black w-[100px]'
-            name='Categories'
-            id='Categories'
-            onChange={SelectHandler}
-          >
-            <option value='All'>All</option>
-            <option value='Clothing'>Clothing</option>
-            <option value='FootWear'>Foot Wear</option>
-            <option value='Cake'>Cake</option>
-            <option value='Cake'>Cake</option>
-          </select>
-        </div>
+
         {isLoading ? (
           <Loading message='Loading products' />
         ) : (
