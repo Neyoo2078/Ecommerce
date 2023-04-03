@@ -32,7 +32,7 @@ const Home = ({ data, setdata }) => {
       <div className='flex justify-between w-[90%] mx-auto gap-2 my-[15px] '>
         <div className='flex flex-col gap-1 w-[25%] border-[2px] p-5'>
           {caterories.map((items, i) => (
-            <div className='flex gap-2 justify-start items-center'>
+            <div className='flex gap-2 justify-start items-center hover:text-[#f5ea57] '>
               <FontAwesomeIcon icon={items?.icon} />
               <NavLink>{items.name}</NavLink>
             </div>
