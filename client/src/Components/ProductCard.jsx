@@ -17,9 +17,9 @@ const ProductCard = ({ product, setAlert }) => {
   };
 
   const AddCartHandler = async () => {
-    const exist = Cart.find((p) => p.id === product.id);
+    const exist = Cart.find((p) => p._id === product._id);
     const quantity = exist ? exist.quantity + 1 : 1;
-    const data = await Api.get(`/${product.id}`);
+    const data = await Api.get(`/details/${product._id}`);
     if (data.countInStock < quantity) {
       window.alert('product of of Stock');
     }
@@ -30,7 +30,7 @@ const ProductCard = ({ product, setAlert }) => {
   return (
     <div>
       <div className='w-[200px]  flex flex-col border-[1px] border-[#00000] '>
-        <Link to={`/productDetails/${product.id}`}>
+        <Link to={`/productDetails/${product._id}`}>
           <img className='w-full h-[280px] ' src={product.image} alt='Prouct' />
         </Link>
         <p className='p-3'>{product.name}</p>

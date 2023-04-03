@@ -8,23 +8,43 @@ import { Route, Routes } from 'react-router-dom';
 import { Header } from './Components';
 import Carts from './Pages/Carts';
 import Signin from './Pages/Signin';
+import Shipping from './Pages/Shipping';
+import Payment from './Pages/Payment';
+import PlaceOrder from './Pages/PlaceOrder';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import CompleteOrder from './Pages/CompleteOrder';
+import OrderList from './Pages/OrderList';
+import { useState } from 'react';
+import UserProfile from './Pages/UserProfile';
+import Search from './Pages/Search';
 
 // const parent = createContext(null);
 function App() {
-  const { value } = useSelector((state) => state.Auth);
+  const { User } = useSelector((state) => state.Auth);
 
-  console.log({ value });
-
+  const niyi = process.env.REACT_APP_MY_TEST;
+  console.log({ niyi });
+  console.log({ User });
+  const [data, setdata] = useState([]);
   return (
     <>
-      <div>
-        <div>
-          <Header />
+      <div className='h-screen overflow-scroll scroll-m-2 w-full'>
+        <div className='h-full  w-full'>
+          <ToastContainer position='bottom-center' limit={1} />
+          <Header setdata={setdata} data={data} />
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={<Home data={data} setdata={setdata} />} />
             <Route path='/productDetails/:id' element={<ProductDeatils />} />
             <Route path='/cart' element={<Carts />} />
             <Route path='/Signin' element={<Signin />} />
+            <Route path='/Shipping' element={<Shipping />} />
+            <Route path='/Payment' element={<Payment />} />
+            <Route path='/Order' element={<PlaceOrder />} />
+            <Route path='/CompleteOrder/:id' element={<CompleteOrder />} />
+            <Route path='/OrderHistory' element={<OrderList />} />
+            <Route path='/UserProfile' element={<UserProfile />} />
+            <Route path='/Search' element={<Search />} />
           </Routes>
         </div>
       </div>

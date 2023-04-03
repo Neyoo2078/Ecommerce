@@ -3,12 +3,51 @@ import { FaLock } from 'react-icons/fa';
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from 'react-icons/md';
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { Signin as Sign } from '../Reducers/Authreducer';
+import { toast } from 'react-toastify';
+import decode from 'jwt-decode';
 
 const Signin = () => {
-  const FormHandler = () => {};
+  const { search } = useLocation();
+  const redirectUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectUrl ? redirectUrl : '/';
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { User } = useSelector((state) => state.Auth);
+  console.log({ User });
+
+  useEffect(() => {
+    if (User) {
+      const token = User?.token;
+      if (token) {
+        const decodetoken = decode(token);
+        if (decodetoken.exp * 1000 < new Date().getTime()) {
+          toast.error('token expire ');
+          return;
+        } else {
+          navigate(redirect);
+        }
+      } else {
+        toast.error('token not available ');
+        return;
+      }
+    }
+  }, [User, navigate, redirect]);
+
   const [ShowPassword, setShowPassword] = useState(false);
   const [Signup, setSignup] = useState(false);
-  const [SignupD, setSignupD] = useState({});
+  const [SignupD, setSignupD] = useState({
+    username: '',
+    email: '',
+    password: '',
+    repassword: '',
+  });
   const [SigninD, setSigninD] = useState({});
   const [EmailFocus, setEmailFocus] = useState(false);
   const [ESignFocus, setESignFocus] = useState(false);
@@ -20,6 +59,35 @@ const Signin = () => {
   const [PwdOk, setPwdOk] = useState(false);
   const [EmailValid, setEmailValid] = useState(false);
   const [PwdValid, setPwdValid] = useState(false);
+
+  console.log({ SigninD });
+  console.log({ Signup });
+
+  const FormHandler = async (e) => {
+    e.preventDefault();
+    const BaseUrl = 'http://localhost:5000';
+    if (Signup) {
+      await axios.post(`${BaseUrl}/user/signup`, SignupD);
+
+      setSignup(false);
+      setSignupD({
+        username: '',
+        email: '',
+        password: '',
+        repassword: '',
+      });
+    } else {
+      try {
+        const userdata = await axios.post(`${BaseUrl}/user/signin`, SigninD);
+
+        dispatch(Sign(userdata.data));
+
+        navigate(`${redirect}`);
+      } catch (error) {
+        toast.error(error.response.data);
+      }
+    }
+  };
 
   useEffect(() => {
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
@@ -47,10 +115,6 @@ const Signin = () => {
       setRePwdMatch(false);
     }
   }, [SignupD.repassword, SignupD.password]);
-  console.log({ RePwdMatch });
-  console.log({ SignupD });
-  console.log({ SigninD });
-  console.log({ EmailOk });
 
   const DetailHandler = (e) => {
     if (Signup) {
@@ -109,6 +173,7 @@ const Signin = () => {
                   type='email'
                   name='email'
                   onChange={DetailHandler}
+                  required
                   onFocus={() => {
                     setESignFocus(true);
                   }}
@@ -122,6 +187,7 @@ const Signin = () => {
                   placeholder='Password'
                   className=' outline-none p-2 rounded-sm '
                   onChange={DetailHandler}
+                  required
                   onFocus={() => {
                     setPSignFocus(true);
                   }}
@@ -137,16 +203,20 @@ const Signin = () => {
                   placeholder='User Name'
                   className=' outline-none p-2 rounded-sm'
                   type='text'
+                  value={SignupD.username}
+                  required
                   onChange={DetailHandler}
-                  name='user name'
+                  name='username'
                   maxLength='15'
                 />
 
                 <input
                   placeholder='Email'
+                  value={SignupD.email}
                   className=' outline-none p-2 rounded-sm'
                   type='email'
                   name='email'
+                  required
                   onChange={DetailHandler}
                   onFocus={() => {
                     setEmailFocus(true);
@@ -158,9 +228,11 @@ const Signin = () => {
                 <div className='bg-white flex items-center justify-between'>
                   <input
                     name='password'
+                    value={SignupD.password}
                     type={ShowPassword ? `text` : `password`}
                     placeholder='Password'
                     className=' outline-none p-2 rounded-sm '
+                    required
                     onChange={DetailHandler}
                     onFocus={() => {
                       setPwdFocus(true);
@@ -189,6 +261,8 @@ const Signin = () => {
                 <div className='bg-white flex items-center'>
                   <input
                     name='repassword'
+                    value={SigninD.repassword}
+                    required
                     onFocus={() => {
                       setRePwdFocus(true);
                     }}

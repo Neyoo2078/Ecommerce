@@ -22,13 +22,13 @@ const ProductDeatils = () => {
   }, [id, dispatch]);
 
   const AddCartHandler = async () => {
-    const exist = Cart.find((p) => p.id === value[0].id);
+    const exist = Cart.find((p) => p._id === value._id);
     const quantity = exist ? exist.quantity + 1 : 1;
-    const data = await Api.get(`/${value[0].id}`);
+    const data = await Api.get(`/${value._id}`);
     if (data.countInStock < quantity) {
       window.alert('product of of Stock');
     }
-    dispatch(AddToCart({ ...value[0], quantity }));
+    dispatch(AddToCart({ ...value, quantity }));
   };
 
   if (PLoading) {
@@ -44,34 +44,34 @@ const ProductDeatils = () => {
         <div className='w-[50%]  '>
           <img
             className='w-[80%] h-[600px] bg-contain m-auto'
-            src={value[0]?.image}
-            alt={value[0].name}
+            src={value.image}
+            alt={value.name}
           />
         </div>
         <div className='w-[25%] flex flex-col text-[20px]'>
           <Helmet>
-            <title>{value[0].name}</title>
+            <title>{value.name}</title>
           </Helmet>
-          <h1 className='py-4  text-[35px]  border-b-2'>{value[0].name}</h1>
+          <h1 className='py-4  text-[35px]  border-b-2'>{value.name}</h1>
           <div className=' py-4  border-b-2'>
-            <Rating rating={value[0].rating} numRating={value[0].numReviews} />
+            <Rating rating={value.rating} numRating={value.numReviews} />
           </div>
           <div className='py-4   border-b-2'>
-            <p>${value[0].price}</p>
+            <p>${value.price}</p>
           </div>
           <div className=' py-4  border-b-2'>
-            <p>Description:{value[0].description}</p>
+            <p>Description:{value.description}</p>
           </div>
         </div>
         <div className='w-[25%] flex flex-col mx-5'>
           <div className='border-[2px] w-[60%] p-[10px] mt-4'>
             <div className='flex  p-[10px]  border-b-2'>
               <p>Price:</p>
-              <p className='m-auto'>${value[0].price}</p>
+              <p className='m-auto'>${value.price}</p>
             </div>
             <div className='flex p-[10px]'>
               <p>Status:</p>
-              {parseInt(value[0].countInStock) > 0 ? (
+              {parseInt(value.countInStock) > 0 ? (
                 <p className='m-auto py-[2px] px-1 text-white rounded-lg bg-[#04880f]'>
                   in Stock
                 </p>
@@ -82,9 +82,9 @@ const ProductDeatils = () => {
               )}
             </div>
             <div className='p-[10px] w-full flex justify-center'>
-              {parseInt(value[0].countInStock) > 0 && (
+              {parseInt(value.countInStock) > 0 && (
                 <button
-                  disabled={value[0].quantity === value[0].countInStock}
+                  disabled={value.quantity === value.countInStock}
                   onClick={AddCartHandler}
                   className='text-black border-black rounded-lg w-full border-[1px] bg-[#FFD700] py-[2px] px-1 m-auto'
                 >

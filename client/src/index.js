@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { store } from './ReduxStore config/store';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +15,9 @@ root.render(
     <Provider store={store}>
       <Router>
         <HelmetProvider>
-          <App />
+          <PayPalScriptProvider deferLoading={true}>
+            <App />
+          </PayPalScriptProvider>
         </HelmetProvider>
       </Router>
     </Provider>

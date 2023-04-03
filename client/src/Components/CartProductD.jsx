@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Api } from '../Api/Api';
 import { AddToCart, RemoveFromCart } from '../Reducers/CartReducer';
 
-const CartProductD = ({ items }) => {
+const CartProductD = ({ items, order }) => {
   const dispatch = useDispatch();
   const { Cart } = useSelector((state) => state.Cart);
 
   const AddCartHandler = async () => {
-    const exist = Cart.find((p) => p.id === items.id);
+    const exist = Cart.find((p) => p._id === items._id);
     const quantity = exist ? exist.quantity + 1 : 1;
-    const data = await Api.get(`/${items.id}`);
+    const data = await Api.get(`/${items._id}`);
     if (data.countInStock < quantity) {
       window.alert('product of of Stock');
     }
@@ -20,9 +20,9 @@ const CartProductD = ({ items }) => {
   };
 
   const RemoveCartHandler = async () => {
-    const exist = Cart.find((p) => p.id === items.id);
+    const exist = Cart.find((p) => p._id === items._id);
     const quantity = exist ? exist.quantity - 1 : 1;
-    const data = await Api.get(`/${items.id}`);
+    const data = await Api.get(`/${items._id}`);
     if (data.countInStock < quantity) {
       window.alert('product of of Stock');
     }
@@ -30,7 +30,7 @@ const CartProductD = ({ items }) => {
   };
 
   const DeleteItem = () => {
-    dispatch(RemoveFromCart(items.id));
+    dispatch(RemoveFromCart(items._id));
   };
 
   return (
@@ -42,36 +42,46 @@ const CartProductD = ({ items }) => {
           alt={items.name}
         />
         <Link
-          to={`/productDetails/${items.id} `}
+          to={`/productDetails/${items._id} `}
           className='m-auto cursor-pointer'
         >
           <p className='text-[#4954f8]'>{items.name}</p>
         </Link>
       </div>
-      <div className='flex  w-[17%] '>
-        <button
-          onClick={RemoveCartHandler}
-          disabled={items.quantity === 1}
-          className={`justify-center w-[35px] h-[35px] bg-slate-400  `}
-        >
-          -
-        </button>
+      {!order && (
+        <div className='flex  w-[17%] '>
+          <button
+            onClick={RemoveCartHandler}
+            disabled={items.quantity === 1}
+            className={`justify-center w-[35px] h-[35px] bg-slate-400  `}
+          >
+            -
+          </button>
 
-        <p className='m-auto '>{items.quantity}</p>
-        <button
-          onClick={AddCartHandler}
-          disabled={items.quantity === items.countInStock}
-          className='justify-center w-[35px] h-[35px] bg-slate-400 '
-        >
-          +
-        </button>
-      </div>
+          <p className='m-auto '>{items.quantity}</p>
+          <button
+            onClick={AddCartHandler}
+            disabled={items.quantity === items.countInStock}
+            className='justify-center w-[35px] h-[35px] bg-slate-400 '
+          >
+            +
+          </button>
+        </div>
+      )}
+      {order && (
+        <div className='w-[10%]'>
+          <p className='m-auto '>{items.quantity}</p>
+        </div>
+      )}
+
       <div className='w-[10%]'>
         <p>${items.price}</p>
       </div>
-      <div className='w-[10%]' onClick={DeleteItem}>
-        <AiFillDelete size={20} />
-      </div>
+      {!order && (
+        <div className='w-[10%]' onClick={DeleteItem}>
+          <AiFillDelete size={20} />
+        </div>
+      )}
     </div>
   );
 };

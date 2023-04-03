@@ -1,18 +1,23 @@
 import React from 'react';
 import { Feature } from '../Components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { fetchPoducts } from '../ReduxMiddleware/ProductActions';
+import ImageSlider from '../Components/Slider';
 
-const Home = () => {
+const Home = ({ data, setdata }) => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchPoducts());
   }, []);
   return (
-    <div>
+    <div className='w-full flex flex-col gap-2 '>
       <div>
-        <Feature />
+        <ImageSlider />
+      </div>
+      <div>
+        <Feature data={data} setdata={setdata} />
       </div>
     </div>
   );

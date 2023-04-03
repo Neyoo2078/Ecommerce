@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import CartProductD from '../Components/CartProductD';
 import { useNavigate } from 'react-router-dom';
 
-const Carts = (props) => {
+const Carts = () => {
   const { Cart } = useSelector((state) => state.Cart);
   const navigate = useNavigate();
   return (
@@ -15,7 +15,7 @@ const Carts = (props) => {
         </Helmet>
         <div className='flex flex-col  w-[70%] '>
           {Cart.map((items) => (
-            <div key={items.id} className='w-full p-4 border-[2px]'>
+            <div key={items._id} className='w-full p-4 border-[2px]'>
               <CartProductD items={items} />
             </div>
           ))}

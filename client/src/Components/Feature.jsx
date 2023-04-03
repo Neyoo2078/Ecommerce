@@ -4,15 +4,23 @@ import { useState } from 'react';
 import Loading from './Loading';
 import ProductCard from './ProductCard';
 
-const Feauture = () => {
+const Feauture = ({ data, setdata }) => {
   const { products, isLoading } = useSelector((state) => state.products);
-  const [data, setdata] = useState([]);
 
   useEffect(() => {
     setdata(products);
-  }, [products]);
+  }, [products, setdata]);
 
   const [Alert, setAlert] = useState(false);
+  const SelectHandler = () => {};
+
+  if (data.length === 0 && !isLoading) {
+    return (
+      <div className='w-full  flex justify-center items-center flex-col'>
+        <p className='mt-[80px] font-semibold'>No Product Is Available</p>
+      </div>
+    );
+  }
 
   return (
     <div className='w-full flex justify-center items-center flex-col'>
@@ -26,13 +34,28 @@ const Feauture = () => {
         </div>
 
         <h1 className='text-[40px]'>Feature Product</h1>
+        <div>
+          <label htmlFor='Categories'> Categories: </label>
+          <select
+            className='text-black w-[100px]'
+            name='Categories'
+            id='Categories'
+            onChange={SelectHandler}
+          >
+            <option value='All'>All</option>
+            <option value='Clothing'>Clothing</option>
+            <option value='FootWear'>Foot Wear</option>
+            <option value='Cake'>Cake</option>
+            <option value='Cake'>Cake</option>
+          </select>
+        </div>
         {isLoading ? (
           <Loading message='Loading products' />
         ) : (
-          <div className='flex justify-between items-center gap-1 flex-wrap'>
+          <div className='flex justify-start items-center gap-3 flex-wrap'>
             {data.map((product) => {
               return (
-                <div key={product.id}>
+                <div key={product._id}>
                   <ProductCard product={product} setAlert={setAlert} />
                 </div>
               );

@@ -5,6 +5,7 @@ import AuthSlice from '../Reducers/Authreducer';
 import ProductSlice from '../Reducers/ProductReducer';
 import PDetailreducer from '../Reducers/PDetailreducer';
 import CartReducer from '../Reducers/CartReducer';
+import Order from '../Reducers/Order';
 
 export const store = configureStore(
   {
@@ -13,6 +14,7 @@ export const store = configureStore(
       products: ProductSlice,
       PDetails: PDetailreducer,
       Cart: CartReducer,
+      Order,
     },
   },
   compose(applyMiddleware(thunk))
