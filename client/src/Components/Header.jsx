@@ -11,7 +11,7 @@ const Header = ({ setdata, data }) => {
   const navigate = useNavigate();
   console.log({ Cart });
   return (
-    <div className='bg-[#4d4646] flex text-[#ffff] px-[20px] h-[70px]  items-center justify-between'>
+    <div className='bg-[#4d4646] flex text-[#ffff] px-[20px] h-[70px] sticky top-0 z-10  items-center justify-between'>
       <Link to='/'>
         <div>Hearder</div>
       </Link>

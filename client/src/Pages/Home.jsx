@@ -7,6 +7,8 @@ import ImageSlider from '../Components/Slider';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import ImageSwiper from '../Components/Swiper';
+import SwiperSl from '../Components/SwiperSlide';
 
 const caterories = [
   { name: 'Supermarket', icon: faShoppingCart },
@@ -39,6 +41,7 @@ const Home = ({ data, setdata }) => {
           ))}
         </div>
         <ImageSlider />
+
         <div className='flex flex-col gap-1 w-[25%] border-[2px]'>
           <div className='w-full'>
             <img
@@ -54,6 +57,8 @@ const Home = ({ data, setdata }) => {
           </div>
         </div>
       </div>
+
+      <SwiperSl data={data} />
       <div>
         <Feature data={data} setdata={setdata} />
       </div>

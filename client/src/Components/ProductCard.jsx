@@ -5,7 +5,7 @@ import { AddToCart } from '../Reducers/CartReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { Api } from '../Api/Api';
 
-const ProductCard = ({ product, setAlert }) => {
+const ProductCard = ({ product, setAlert, slider }) => {
   const dispatch = useDispatch();
   const { Cart } = useSelector((state) => state.Cart);
 
@@ -31,11 +31,17 @@ const ProductCard = ({ product, setAlert }) => {
     <div>
       <div className='w-[200px]  flex flex-col border-[1px] border-[#00000] '>
         <Link to={`/productDetails/${product._id}`}>
-          <img className='w-full h-[280px] ' src={product.image} alt='Prouct' />
+          <img
+            className={`w-full h-[280px] ${slider && 'h-[180px]'}`}
+            src={product.image}
+            alt='Prouct'
+          />
         </Link>
-        <p className='p-3'>{product.name}</p>
+        <p className={`p-3 ${slider && 'text-white p-1'}`}>{product.name}</p>
         <Rating rating={product.rating} numRating={product.numReviews} />
-        <p className='p-3 font-bold'>${product.price}</p>
+        <p className={`p-3 font-bold ${slider && 'text-white p-1'}`}>
+          ${product.price}
+        </p>
         <button
           disabled={product.quantity === product.countInStock}
           onClick={AddCartHandler}

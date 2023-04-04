@@ -19,7 +19,7 @@ const ImageSwiper = () => {
       navigation
       pagination={{ clickable: true }}
       loop={true}
-      autoplay={{ delay: 3000 }}
+      autoplay={{ delay: 1000 }}
     >
       {images.map((image, index) => (
         <SwiperSlide key={index}>
