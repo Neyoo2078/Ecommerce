@@ -31,8 +31,8 @@ const Home = ({ data, setdata }) => {
   }, []);
   return (
     <div className='w-full flex flex-col gap-2 '>
-      <div className='flex justify-between w-[90%] mx-auto gap-2 my-[15px] '>
-        <div className='flex flex-col gap-1 w-[25%] border-[2px] p-5'>
+      <div className='flex  flex-col md:flex-row justify-between w-[90%] mx-auto gap-2 my-[15px] '>
+        <div className='md:flex hidden flex-col gap-1  w-[25%] border-[2px] p-5'>
           {caterories.map((items, i) => (
             <div className='flex gap-2 justify-start items-center hover:text-[#f5ea57] '>
               <FontAwesomeIcon icon={items?.icon} />
@@ -42,7 +42,7 @@ const Home = ({ data, setdata }) => {
         </div>
         <ImageSlider />
 
-        <div className='flex flex-col gap-1 w-[25%] border-[2px]'>
+        <div className='flex flex-row md:flex-col gap-1 w-full md:w-[25%] border-[2px]'>
           <div className='w-full'>
             <img
               src='https://ng.jumia.is/cms/0-1-cpr/2022/june-14/free-delivery_218x184.png'

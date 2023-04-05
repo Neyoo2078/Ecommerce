@@ -31,7 +31,7 @@ const FilterSearch = ({ setdata, data }) => {
   };
 
   return (
-    <div className='z-10 flex h-[70px] overflow-visible mt-[20px]'>
+    <div className='z-10 md:flex hidden h-[70px] overflow-visible mt-[20px]'>
       <div className='flex flex-col gap-4'>
         <div className='flex my-[5px] justify-between bg-white items-center rounded-md p-2 h-[40px]'>
           <input

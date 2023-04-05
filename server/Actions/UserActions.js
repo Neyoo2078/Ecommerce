@@ -35,7 +35,7 @@ export const userSignin = async (req, res) => {
       } else {
         const token = Jwt.sign(
           { username: exist.username, email: exist.email, id: exist._id },
-          'ecommerce',
+          process.env.JWT_PASSWORD,
           { expiresIn: '2h' }
         );
         res.status(200).json({
@@ -74,7 +74,7 @@ export const userUpdate = async (req, res) => {
           email: newprofile.email,
           id: newprofile._id,
         },
-        'ecommerce',
+        process.env.JWT_PASSWORD,
         { expiresIn: '6h' }
       );
       res.status(200).json({

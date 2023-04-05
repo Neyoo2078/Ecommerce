@@ -4,7 +4,7 @@ export const UserAuth = async (req, res, next) => {
     console.log('here');
     const auth = req.headers.authorization?.split(' ')[1];
 
-    const decodedData = jwt.verify(auth, 'ecommerce');
+    const decodedData = jwt.verify(auth, process.env.JWT_PASSWORD);
     req.user = decodedData;
     console.log(req.user);
     next();

@@ -16,7 +16,7 @@ const Header = ({ setdata, data }) => {
         <div>Hearder</div>
       </Link>
       <FilterSearch setdata={setdata} data={data} />
-      <div className='flex gap-3 items-center overflow-visible justify-between  h-full w-[300px]'>
+      <div className='flex  gap-1 md:gap-3 items-center overflow-visible justify-between  h-full w-[300px]'>
         <DropMenu User={User} />
         <div
           className='relative p-1'

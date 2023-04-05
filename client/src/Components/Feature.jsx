@@ -33,12 +33,12 @@ const Feauture = ({ data, setdata }) => {
           )}
         </div>
 
-        <h1 className='text-[40px]'>Feature Product</h1>
+        <h1 className=' text-[20px] md:text-[40px]'>Feature Product</h1>
 
         {isLoading ? (
           <Loading message='Loading products' />
         ) : (
-          <div className='flex justify-start items-center gap-3 flex-wrap'>
+          <div className='flex justify-center items-center gap-2 md:gap-3 flex-wrap'>
             {data.map((product) => {
               return (
                 <div key={product._id}>

@@ -31,12 +31,6 @@ const leftArrowStyles = {
   cursor: 'pointer',
 };
 
-const sliderStyles = {
-  position: 'relative',
-
-  width: '55%',
-};
-
 const dotsContainerStyles = {
   display: 'flex',
   justifyContent: 'center',
@@ -85,7 +79,7 @@ const ImageSlider = () => {
   }, [currentIndex]);
 
   return (
-    <div style={sliderStyles} className='border-[2px]'>
+    <div className='border-[2px] relative w-full  md:w-[55%]  h-[300px] md:min-h-[400px]'>
       <div>
         <div onClick={goToPrevious} style={leftArrowStyles}>
           ❰

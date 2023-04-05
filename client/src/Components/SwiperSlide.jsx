@@ -50,7 +50,7 @@ const SwiperSl = ({ data }) => {
           >
             {data?.map((items, i) => (
               <SwiperSlide>
-                <ProductCard slider product={items} />
+                <ProductCard slider={true} product={items} />
               </SwiperSlide>
             ))}
           </Swiper>

@@ -32,7 +32,9 @@ const ProductCard = ({ product, setAlert, slider }) => {
       <div className='w-[200px]  flex flex-col border-[1px] border-[#00000] '>
         <Link to={`/productDetails/${product._id}`}>
           <img
-            className={`w-full h-[280px] ${slider && 'h-[180px]'}`}
+            className={`w-full h-[200px] md:h-[280px] ${
+              slider && 'h-[150px] md:h-[180px]'
+            }`}
             src={product.image}
             alt='Prouct'
           />
