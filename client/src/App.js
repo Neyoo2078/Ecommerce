@@ -18,19 +18,24 @@ import OrderList from './Pages/OrderList';
 import { useState } from 'react';
 import UserProfile from './Pages/UserProfile';
 import Search from './Pages/Search';
+import Footer from './Components/Footer';
+import { useLocation } from 'react-router-dom';
+import DashBoard from './Pages/DashBoard';
 
-// const parent = createContext(null);
 function App() {
   const { User } = useSelector((state) => state.Auth);
+
+  const location = useLocation();
 
   const niyi = process.env.REACT_APP_MY_TEST;
   console.log({ niyi });
   console.log({ User });
   const [data, setdata] = useState([]);
+
   return (
     <>
-      <div className='h-screen overflow-scroll scroll-m-2 w-full'>
-        <div className='h-full  w-full'>
+      <div className='h-screen  overflow-scroll scroll-m-2 w-full'>
+        <div className='h-full  w-full flex flex-col'>
           <ToastContainer position='bottom-center' limit={1} />
           <Header setdata={setdata} data={data} />
           <Routes>
@@ -45,6 +50,7 @@ function App() {
             <Route path='/OrderHistory' element={<OrderList />} />
             <Route path='/UserProfile' element={<UserProfile />} />
             <Route path='/Search' element={<Search />} />
+            <Route path='/DashBoard' element={<DashBoard />} />
           </Routes>
         </div>
       </div>

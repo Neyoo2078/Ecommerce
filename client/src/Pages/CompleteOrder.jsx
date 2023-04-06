@@ -9,6 +9,7 @@ import { FetchOrder, OrderLoading } from '../Reducers/Order';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import dateFormat from 'dateformat';
+import Loading from '../Components/Loading';
 
 const CompleteOrder = () => {
   const { id } = useParams();
@@ -143,7 +144,9 @@ const CompleteOrder = () => {
             {!order?.isPaid ? (
               <div>
                 {isPending ? (
-                  <h1>Loading</h1>
+                  <div className='m-auto'>
+                    <Loading />
+                  </div>
                 ) : (
                   <PayPalButtons
                     createOrder={ceateOrder}

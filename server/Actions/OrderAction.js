@@ -47,7 +47,7 @@ export const updateOrder = async (req, res) => {
 
 export const FetchOrder = async (req, res) => {
   const { id } = req.params;
-  const { _id } = req.user;
+
   try {
     const data = await Order.find({ user: id });
     res.status(200).json(data);

@@ -53,7 +53,7 @@ const PlaceOrder = () => {
 
   return (
     <>
-      <div className='w-full p-10 '>
+      <div className='w-full p-10 flex flex-col '>
         <Helmet>
           <title>Ored items</title>
         </Helmet>
@@ -69,6 +69,9 @@ const PlaceOrder = () => {
                 <button
                   className='text-[#4e0afa] underline underline-offset-2 '
                   type='button'
+                  onClick={() => {
+                    navigate('/Shipping');
+                  }}
                 >
                   Edit
                 </button>

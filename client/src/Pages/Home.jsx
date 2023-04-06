@@ -6,25 +6,41 @@ import { fetchPoducts } from '../ReduxMiddleware/ProductActions';
 import ImageSlider from '../Components/Slider';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import {
+  faShoppingCart,
+  faTasks,
+  faHome,
+  faGem,
+  faPhone,
+  faDesktop,
+  faCar,
+  faRunning,
+  faGamepad,
+  faSoap,
+  faTshirt,
+  faTv,
+} from '@fortawesome/free-solid-svg-icons';
 import ImageSwiper from '../Components/Swiper';
 import SwiperSl from '../Components/SwiperSlide';
+import { useLocation } from 'react-router-dom';
 
 const caterories = [
   { name: 'Supermarket', icon: faShoppingCart },
-  { name: ' Beauty', icon: faShoppingCart },
-  { name: 'Home & Office', icon: faShoppingCart },
-  { name: 'Phone & Tablets', icon: faShoppingCart },
-  { name: 'Computing', icon: faShoppingCart },
-  { name: 'Electronics', icon: faShoppingCart },
-  { name: 'Fashion', icon: faShoppingCart },
-  { name: 'Baby Products', icon: faShoppingCart },
-  { name: 'Gaming', icon: faShoppingCart },
-  { name: 'Sporting Goods', icon: faShoppingCart },
-  { name: 'Automoile', icon: faShoppingCart },
+  { name: ' Beauty', icon: faGem },
+  { name: 'Home & Office', icon: faHome },
+  { name: 'Phone & Tablets', icon: faPhone },
+  { name: 'Computing', icon: faDesktop },
+  { name: 'Electronics', icon: faTv },
+  { name: 'Fashion', icon: faTshirt },
+  { name: 'Baby Products', icon: faSoap },
+  { name: 'Gaming', icon: faGamepad },
+  { name: 'Sporting Goods', icon: faRunning },
+  { name: 'Automoile', icon: faCar },
 ];
 const Home = ({ data, setdata }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  console.log({ location });
 
   useEffect(() => {
     dispatch(fetchPoducts());

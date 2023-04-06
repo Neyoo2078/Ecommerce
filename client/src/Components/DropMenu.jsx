@@ -2,10 +2,13 @@ import React from 'react';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Signout } from '../Reducers/Authreducer';
 
 const DropMenu = ({ User }) => {
   const [DropOpen, setDropOpen] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <div
       className='m-auto flex flex-col gap-4 mt-[15px]'
@@ -49,7 +52,7 @@ const DropMenu = ({ User }) => {
         >
           <div
             onClick={() => {
-              navigate('/UserProfile');
+              navigate('/DashBoard');
               setDropOpen(false);
             }}
             className='cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
@@ -65,10 +68,21 @@ const DropMenu = ({ User }) => {
           >
             Order History
           </div>
-          <div className='cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>
-            settings
+          <div
+            onClick={() => {
+              navigate('/UserProfile');
+              setDropOpen(false);
+            }}
+            className='cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
+          >
+            Settings
           </div>
-          <div className='cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>
+          <div
+            onClick={() => {
+              dispatch(Signout());
+            }}
+            className='cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
+          >
             SignOut
           </div>
         </div>

@@ -8,6 +8,8 @@ import { useEffect } from 'react';
 import { Api } from '../Api/Api';
 import { useState } from 'react';
 import ProductCard from '../Components/ProductCard';
+import Footer from '../Components/Footer';
+import Loading from '../Components/Loading';
 
 const Search = () => {
   const pagess = 7;
@@ -79,7 +81,10 @@ const Search = () => {
   return (
     <div className='w-full'>
       {catLoading ? (
-        <div className='m-auto'>Loading..</div>
+        <div className='mx-auto mt-9'>
+          {' '}
+          <Loading message='Loaing data' />
+        </div>
       ) : (
         <div className='flex flex-col items-center p-[20px] w-full'>
           <div>
@@ -208,6 +213,9 @@ const Search = () => {
                 ))}
               </div>
             </div>
+          </div>
+          <div>
+            <Footer />
           </div>
         </div>
       )}
